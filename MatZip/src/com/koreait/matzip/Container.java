@@ -14,6 +14,7 @@ public class Container extends HttpServlet {
        
 	private HandlerMapper mapper;
 	
+	//Container 클래스가 생성될때 생성자가 생성 Tomcat이 생성 
 	public Container() {
 		mapper = new HandlerMapper();
 	}
@@ -31,6 +32,7 @@ public class Container extends HttpServlet {
 		for(int i=0; i<uriArr.length; i++) {
 			System.out.println("uriArr["+ i+ "]: " + uriArr[i]);
 		}
+		proc(request,response);
 	}
 
 	
@@ -41,6 +43,28 @@ public class Container extends HttpServlet {
 	
 	private void proc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String temp = mapper.nav(request);
+		System.out.println("temp: " + temp);
+		
+		
+		if(temp.indexOf("/")>=0) {
+			String isRedirect = temp.substring(0,temp.indexOf("/"));
+			System.out.println("isRedirect : " + isRedirect);
+			if("redirect:".equals(isRedirect)) {
+				response.sendRedirect(temp.substring(temp.indexOf("/")));
+				return;
+			}
+			
+		}
+		
+		
+		switch(temp) {
+		case "405":
+			temp = "/WEB-INF/view/error.jsp";
+			break;
+		case "404":
+			temp = "/WEB-INF/view/notFound.jsp";
+			break;
+		}
 		
 		request.getRequestDispatcher(temp).forward(request, response);
 	}

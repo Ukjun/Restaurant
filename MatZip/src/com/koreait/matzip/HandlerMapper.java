@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import com.koreait.matzip.user.UserController;
 
 public class HandlerMapper {
-	private UserController user;
+	private UserController userCon;
 	public HandlerMapper() {
-		
+		userCon = new UserController();
 	}
 	
 	public String nav(HttpServletRequest request) {
@@ -15,20 +15,24 @@ public class HandlerMapper {
 		
 		String[] uriArr = request.getRequestURI().split("/");
 		
-		if(uriArr.length <2) {
-			return null;
+		if(uriArr.length <3) {
+			return "405";
 		}
 		
 		switch(uriArr[1]) {
 		case ViewRef.URI_USER:
 			switch(uriArr[2]) {
 			case "login":
-				user.login(request);
-				break;
+				return userCon.login(request);
+				
+			case "join":
+				return userCon.join(request);
 			}
-			break;
+			case "joinProc":
+				return userCon.joinProc(request);
+			case "loginProc":
+				return userCon.joinProc(request);
 		}
-		
-		return null;
+		return "404";
 	}
 }
