@@ -9,6 +9,17 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+	    <servlet-name>staticServlet</servlet-name>
+	    <servlet-class>com.koreait.matzip.StaticContainer</servlet-class>
+	</servlet>
+   
+    <servlet-mapping>
+            <servlet-name>staticServlet</servlet-name>
+            <url-pattern>/res/*</url-pattern>
+    </servlet-mapping>
+    
   <filter>
 		<filter-name>setCharacterEncodingFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -22,4 +33,5 @@
 		<filter-name>setCharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 </web-app>
