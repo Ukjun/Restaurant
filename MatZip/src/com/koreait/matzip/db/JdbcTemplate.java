@@ -23,24 +23,23 @@ public class JdbcTemplate {
 		}
 		return result;
 	}
-	public static int executeQuery(String sql, JdbcSelectInterface jdbc) {
+	public static void executeQuery(String sql, JdbcSelectInterface jdbc) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int result =0;
 		try {
 			conn = DBManager.getCon();
 			ps = conn.prepareStatement(sql);
 			jdbc.prepared(ps);
 			
 			rs = ps.executeQuery();
-			result = jdbc.executeQuery(rs);
+			jdbc.executeQuery(rs);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBManager.close(conn, ps,rs);
 		}
-		return result;
+		
 		
 	}
 	public static List<?> executeQueryList(String sql, JdbcSelectInterface jdbc){
