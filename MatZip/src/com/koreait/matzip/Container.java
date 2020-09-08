@@ -39,6 +39,7 @@ public class Container extends HttpServlet {
 			System.out.println("value : " + value);
 			
 			if("redirect".equals(prefix)) {
+				//value값 "/"빠져서 재설정 
 				value = temp.substring(temp.indexOf(":")+1);
 				response.sendRedirect(value);
 				return;
