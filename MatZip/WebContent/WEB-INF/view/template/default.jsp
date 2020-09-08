@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <link href="../favicon.ico" rel="icon" type="image/x-icon">
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <title>${title }</title>
 </head>
 <body>
-	<div id = "container">
+	<div id ="container">
 		<jsp:include page="/WEB-INF/view/${view }.jsp"></jsp:include>
 	</div>
 </body>
