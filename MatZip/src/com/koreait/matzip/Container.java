@@ -34,7 +34,7 @@ public class Container extends HttpServlet {
 
 		if(temp.indexOf(":") >= 0) {
 			String prefix = temp.substring(0, temp.indexOf(":"));
-			String value = temp.substring(temp.indexOf(":") + 2);
+			String value = temp.substring(temp.indexOf(":") + 1);
 			System.out.println("prefix : " + prefix);
 			System.out.println("value : " + value);
 			
