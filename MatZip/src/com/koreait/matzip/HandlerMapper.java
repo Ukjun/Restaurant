@@ -13,7 +13,9 @@ public class HandlerMapper {
 
 	public String nav(HttpServletRequest request) {
 		String[] uriArr = request.getRequestURI().split("/");
-
+		for(int i=0; i<uriArr.length; i++) {
+			System.out.println("uriArr[" + i + "] : " + uriArr[i]);
+		}
 		if (uriArr.length < 3) {
 			return "405"; // Error
 		}

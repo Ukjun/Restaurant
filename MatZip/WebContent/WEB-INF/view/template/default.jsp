@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel = "stylesheet" type="text/css" href="/res/css/common.css">
-<title>${title }</title>
+<link rel="stylesheet" type="text/css" href="/res/css/common.css?ver=1">
+
+<title>${view}</title>
 </head>
 <body>
 	<div id ="container">
-		<jsp:include page="/WEB-INF/view/${view }.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/view/${view}.jsp"></jsp:include>
 	</div>
 </body>
 </html>

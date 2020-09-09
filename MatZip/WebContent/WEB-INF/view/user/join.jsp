@@ -1,30 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="../favicon.ico" rel="icon" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <div id="sectionContainerCenter">
 	<div>
 		<form id="frm" class="frm" action="/user/joinProc" method="post">
 			<div id="idChkResult" class="msg"></div>
-			<div>
-				<input type="text" name="user_id" placeholder="아이디">
-				<button type="button" onclick="chkId()">아이디 중복체크</button>
+			<div><input type="text" name="user_id" id="user_id" placeholder="아이디">
+				<button type="button" id="id_btn" onclick="chkId()">아이디 중복체크</button>
 			</div>
-			<div>
-				<input type="password" name="user_pw" placeholder="비밀번호">
-			</div>
-			<div>
-				<input type="password" name="user_pwre" placeholder="비밀번호 확인">
-			</div>
-			<div>
-				<input type="text" name="nm" placeholder="이름">
-			</div>
-			<div>
-				<input type="submit" value="회원가입">
-			</div>
+			<div><input type="password" name="user_pw" placeholder="비밀번호"></div>
+			<div><input type="password" name="user_pwre" placeholder="비밀번호 확인"></div>
+			<div><input type="text" name="nm" placeholder="이름"></div>
+			<div><input type="submit" value="회원가입"></div>
 		</form>
-		<div>
-			<a href="/user/login">로그인</a>
-		</div>
+		<div><a href="/user/login">로그인</a></div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script>

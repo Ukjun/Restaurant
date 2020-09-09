@@ -31,7 +31,8 @@ public class Container extends HttpServlet {
 
 	private void proc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String temp = mapper.nav(request);
-
+		System.out.println("temp: " + temp);
+		System.out.println("const.view : " + Const.VIEW);
 		if(temp.indexOf(":") >= 0) {
 			String prefix = temp.substring(0, temp.indexOf(":"));
 			String value = temp.substring(temp.indexOf(":") + 1);

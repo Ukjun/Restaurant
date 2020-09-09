@@ -27,8 +27,6 @@ public class UserController {
 				break;
 			}
 		}
-		
-		
 		request.setAttribute(Const.TITLE, "로그인");
 		request.setAttribute(Const.VIEW, "user/login");
 		return ViewRef.TEMP_DEFAULT;
