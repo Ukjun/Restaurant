@@ -2,18 +2,21 @@ package com.koreait.matzip;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.koreait.matzip.restaurant.RestaurantController;
 import com.koreait.matzip.user.UserController;
 
 public class HandlerMapper {
 	private UserController userCon;
+	private RestaurantController restCon;
 
 	public HandlerMapper() {
 		userCon = new UserController();
+		restCon = new RestaurantController();
 	}
 
 	public String nav(HttpServletRequest request) {
 		String[] uriArr = request.getRequestURI().split("/");
-		for(int i=0; i<uriArr.length; i++) {
+		for (int i = 0; i < uriArr.length; i++) {
 			System.out.println("uriArr[" + i + "] : " + uriArr[i]);
 		}
 		if (uriArr.length < 3) {
@@ -38,6 +41,13 @@ public class HandlerMapper {
 				return userCon.loginProc(request);
 			case "ajaxIdChk":
 				return userCon.ajaxIdChk(request);
+			case "logout":
+				return userCon.logOut(request);
+			}
+		case ViewRef.URI_RESTURANT:
+			switch(uriArr[2]) {
+			case "map":
+				return restCon.restMap(request);
 			}
 		}
 

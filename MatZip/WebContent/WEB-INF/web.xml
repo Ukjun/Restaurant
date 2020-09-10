@@ -17,6 +17,7 @@
     <servlet-mapping>
             <servlet-name>staticServlet</servlet-name>
             <url-pattern>/res/*</url-pattern>
+            
     </servlet-mapping>
  
     

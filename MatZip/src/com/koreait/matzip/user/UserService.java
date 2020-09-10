@@ -49,6 +49,13 @@ public class UserService {
 			System.out.println("before pw : " + result.getUser_pw());
 			System.out.println("after pw : " + encryptPw);
 			if(encryptPw.equals(result.getUser_pw())) {
+				param.setUser_pw(null);
+				param.setI_user(result.getI_user());
+				param.setNm(result.getNm());
+				param.setProfile_img(result.getProfile_img());
+				
+				param = result;
+				
 				return 1;
 			}else { // 비밀번호 틀림 
 				return 3;

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link href="../favicon.ico" rel="icon" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
 <div id="sectionContainerCenter">
@@ -16,8 +15,13 @@
 			<div>
 				<input type="submit" value="로그인">
 			</div>
+			<div><input type="button" id="joinLogin" onclick="moveToJoin()" value="Move To Join"></div>
 		</form>
-		<a href="/user/join">회원가입</a>
 	</div>
 </div>
+<script>
+	function moveToJoin(){
+		location.href = "/user/join"
+	}
+</script>
 

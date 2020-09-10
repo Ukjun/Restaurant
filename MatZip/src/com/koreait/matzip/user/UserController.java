@@ -2,7 +2,9 @@ package com.koreait.matzip.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.koreait.matzip.CommonUtils;
 import com.koreait.matzip.Const;
 import com.koreait.matzip.ViewRef;
 import com.koreait.matzip.vo.UserVO;
@@ -71,8 +73,10 @@ public class UserController {
 		int result = service.login(param);
 		
 		if(result==1) {
-			request.setAttribute(Const.VIEW, "restaurant/map");
-			return ViewRef.TEMP_MAP;
+			HttpSession hs = request.getSession();
+			hs.setAttribute(Const.LOGIN_USER, param);
+			
+			return "redirect:/restaurant/map";
 		}
 		else {
 			return "redirect:/user/login?user_id=" + user_id + "&error="+result;
@@ -94,6 +98,14 @@ public class UserController {
 		
 		return String.format("ajax:{\"result\": %s}",result);
 		
+	}
+	
+	
+	public String logOut(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		hs.invalidate();
+		
+		return "redirect:/user/login";
 	}
 }
 

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link href="../favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/res/css/common.css?ver=1">
+<link rel="stylesheet" type="text/css" href="/res/css/common.css">
 
 <title>${view}</title>
 </head>

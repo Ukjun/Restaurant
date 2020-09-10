@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
-*{padding : 0; 
-margin: 0 auto; 
-font-family: 'Gamja Flower', cursive; 
-	font-size: 25px;}
-
+ *{
+ 	font-family: 'Gamja Flower', cursive;
+ 	font-size: 25px;
+ 	margin: 0 auto; 
+ 	padding : 0; 
+	
+	}
 html, body{
 	padding: 0;
 	margin : 0;
@@ -12,9 +14,47 @@ html, body{
 	height : 100%;
 	
 }
+a{
+	color : black;
+	text-decoration: none;
+}
 #container{
+	display : flex;
+	flex-direction : column;
 	width:100%;
 	height:100%;
+}
+#container > header {
+	width : 100%;
+	display : flex;
+	padding : 10px;
+	background-color: #ccccff;
+	height : 70px;
+}
+#container > section{
+	/* 남은 공간 비율 ( ex) 1 2 3일경우 각각 1/6 2/6 3/6 의 공간을 차지  */
+	flex-grow : 1;
+	
+}
+#container > footer{
+	align-items: center;
+	background-color: #636e72;
+	color : white;
+	display : flex;
+	height : 50px;
+	justify-content: center;
+	padding : 10px;
+
+}
+#container > header > #headerLeft{
+	flex-grow:1;
+	display: flex;
+    align-items: center;
+}
+#container > header > #headerRight{
+	flex-grow:1;
+	text-align: right;
+	margin-right : 20px;
 }
 #sectionContainerCenter{
 	width:100%;
@@ -22,38 +62,45 @@ html, body{
 	display:flex;
 	justify-content: center;
 	align-items: center;
+	background-image: url('img/unnamed.jpg');
+	background-repeat: no-repeat;
+	background-size: cover; 
+	
 	/* background-image: url('img/test.gif'); */
 }
 #sectionContainerCenter form{
-	text-align: center; margin-top: 100px;
+	text-align: center;
 }
 #sectionContainerCenter input{
-	 width: 500px; height: 50px; margin-bottom: 20px; border-radius : 20px;
+	 width: 380px; height: 50px; margin-bottom: 30px; border-radius : 20px;
+	 padding-left : 20px;
 }
+
 #sectionContainerCenter #user_id{
 	position: relative;
 }
 #sectionContainerCenter #id_btn{
 	position : absolute;
-	margin-left : -200px;
-	width : 200px;
+	margin-left : -100px;
+	width :100px;
 	height : 50px;
 	border-radius : 20px;
+	font-size: small;
+}
+#sectionContainer{
+	background-color : rgba(0,0,0,0.1);
 }
 .frm {
+	
 	padding : 15px;
-	border :1px solid #c628d7;
 }
 #idChkResult{
 	color : red;
 	animation-name : test22;
 	animation-duration : 3s;
-	animation-fill-mode : foward;
-	
 }
 
 @keyframes test22 {
-	
 	from
 	{
 	margin-left : 200%;
@@ -65,4 +112,14 @@ html, body{
 	width: 100%;
 	color : yellow;
 	}
+}
+#joinLogin{
+	width : 300px;
+	text-align: center;
+	text-decoration: none;
+}
+.pImg {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
 }
