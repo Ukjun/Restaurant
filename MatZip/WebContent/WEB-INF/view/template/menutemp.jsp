@@ -27,14 +27,17 @@
 								src="/res/img/default_profile.jpg">
 						</c:otherwise>
 					</c:choose>
-					
+
 				</div>
 				<div class="ml5">${LoginUser.nm}님환영합니다.</div>
 				<div class='ml15' id="headerLogout">
 					<a href="/user/logout">로그아웃</a>
 				</div>
 			</div>
-			<div id="headerRight">메뉴들</div>
+			<div id="headerRight">
+				<a href="/restaurant/reg">등록</a> 
+				<a class="ml15" href="/user/favorite">찜</a>
+			</div>
 		</header>
 		<section>
 			<jsp:include page="/WEB-INF/view/${view }.jsp"></jsp:include>
