@@ -62,6 +62,9 @@ public class Container extends HttpServlet {
 				
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("application/json");
+				
+				
+				// 서블릿 형태에서 바로 응답해오는 것 jsp파일이 PrintWriter로 변환되서 응답된다.
 				PrintWriter out = response.getWriter();
 				
 				System.out.println("value : " + value);

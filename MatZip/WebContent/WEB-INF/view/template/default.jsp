@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/res/css/common.css">
 
-<title>${view}</title>
+<title>${title}</title>
 </head>
 <body>
 	<div id ="container">

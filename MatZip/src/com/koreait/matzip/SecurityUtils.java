@@ -10,13 +10,15 @@ import javax.servlet.http.HttpSession;
 import com.koreait.matzip.vo.UserVO;
 
 public class SecurityUtils {
-	public static UserVO getLoginUser(HttpServletRequest request) {
+	
+	
+	public static UserVO getLoginUser(HttpServletRequest request) { // 로그인 유저 확인
 		HttpSession hs = request.getSession();
 		return(UserVO)hs.getAttribute(Const.LOGIN_USER);
 	}
 	
-	public static boolean isLogout(HttpServletRequest request) {
-		return getLoginUser(request)==null;
+	public static boolean isLogout(HttpServletRequest request) { // 로그아웃 확인 
+		return getLoginUser(request)==null; // 세션으로 넘어오지않는 경우 true 반환
 	}
 	
 	

@@ -11,8 +11,8 @@
 			<div><input type="password" name="user_pw" placeholder="비밀번호"></div>
 			<div><input type="password" name="user_pwre" placeholder="비밀번호 확인"></div>
 			<div><input type="text" name="nm" placeholder="이름"></div>
-			<div><input type="submit" value="회원가입"></div>
-			<div><input type="button" onclick="moveToLogin()" value="Move To Login"></div>
+			<div><input type="submit" id="joinBtn" value="회원가입"></div>
+			<div><input type="button" id="joinBtn" onclick="moveToLogin()" value="Move To Login"></div>
 		</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -25,6 +25,7 @@
 		const user_id = frm.user_id.value;
 		axios.get('/user/ajaxIdChk',{
 			params: {
+				//문자 : value 값
 				user_id
 			}
 		}).then(function(res){
