@@ -3,9 +3,6 @@
  *{
  	font-family: 'Gamja Flower', cursive;
  	font-size: 25px;
- 	margin: 0 auto; 
- 	padding : 0; 
-	
 	}
 html, body{
 	padding: 0;
@@ -18,6 +15,9 @@ a{
 	color : black;
 	text-decoration: none;
 }
+.ml5 { margin-left: 5px; }
+.ml10 { margin-left: 10px; }
+.ml15 { margin-left: 15px; }
 #container{
 	display : flex;
 	flex-direction : column;
@@ -30,6 +30,20 @@ a{
 	padding : 10px;
 	background-color: #ccccff;
 	height : 70px;
+}
+#container > header > #headerLeft{
+	flex-grow:1;
+	display: flex;
+    align-items: center;
+}
+#container > header > #headerLeft > #headerLogout > a {
+	color: blue;
+}
+#container > header > #headerRight{
+	flex-grow:1;
+	text-align: right;
+	margin-right : 20px;
+	margin-top : 20px;
 }
 #container > section{
 	/* 남은 공간 비율 ( ex) 1 2 3일경우 각각 1/6 2/6 3/6 의 공간을 차지  */
@@ -45,16 +59,6 @@ a{
 	justify-content: center;
 	padding : 10px;
 
-}
-#container > header > #headerLeft{
-	flex-grow:1;
-	display: flex;
-    align-items: center;
-}
-#container > header > #headerRight{
-	flex-grow:1;
-	text-align: right;
-	margin-right : 20px;
 }
 #sectionContainerCenter{
 	width:100%;
@@ -118,8 +122,16 @@ a{
 	text-align: center;
 	text-decoration: none;
 }
-.pImg {
+
+.containerPImg {
+	display: inline-block;	
 	width: 48px;
 	height: 48px;
-	border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.pImg {
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
 }

@@ -30,7 +30,21 @@ public class Container extends HttpServlet {
 	}
 
 	private void proc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//로그인 되어 있으면 login, join은 접속 x
+		
+//		boolean isLogout = SecurityUtils.isLogout(request);
+		String routerCheckResult = LoginChkInterceptor.routerChk(request);
+		
+		if(routerCheckResult != null) {
+			response.sendRedirect(routerCheckResult);
+			return;
+		}
+		
+		//로그인이 안 되어 있으면 전부 로그인이 되어 있어야함
+		
+		
 		String temp = mapper.nav(request);
+		
 		System.out.println("temp: " + temp);
 		System.out.println("const.view : " + Const.VIEW);
 		if(temp.indexOf(":") >= 0) {

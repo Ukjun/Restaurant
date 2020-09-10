@@ -16,20 +16,25 @@
 	<div id="container">
 		<header>
 			<div id="headerLeft">
-				<c:choose>
-					<c:when test="${LoginUser.profile_img != null}">
-						<img class="pImg" onclick="window.open(this.src)"
-							src="/res/img/user/${LoginUser.i_user }/${LoginUser.profile_img}">
-					</c:when>
-					<c:otherwise>
-						<img class="pImg" onclick="window.open(this.src)"
-							src="/res/img/default_profile.jpg">
-					</c:otherwise>
-				</c:choose>
-				<div id="headerNm">${LoginUser.nm}님 환영합니다.</div>
-				<div><a href="/user/logout">로그아웃</a></div>
+				<div class="containerPImg">
+					<c:choose>
+						<c:when test="${LoginUser.profile_img != null}">
+							<img class="pImg" onclick="window.open(this.src)"
+								src="/res/img/user/${LoginUser.i_user }/${LoginUser.profile_img}">
+						</c:when>
+						<c:otherwise>
+							<img class="pImg" onclick="window.open(this.src)"
+								src="/res/img/default_profile.jpg">
+						</c:otherwise>
+					</c:choose>
+					
+				</div>
+				<div class="ml5">${LoginUser.nm}님환영합니다.</div>
+				<div class='ml15' id="headerLogout">
+					<a href="/user/logout">로그아웃</a>
+				</div>
 			</div>
-			<div id="headerRight">로그아웃/메뉴들</div>
+			<div id="headerRight">메뉴들</div>
 		</header>
 		<section>
 			<jsp:include page="/WEB-INF/view/${view }.jsp"></jsp:include>
