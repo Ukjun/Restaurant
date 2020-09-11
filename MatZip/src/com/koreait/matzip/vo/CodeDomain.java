@@ -3,8 +3,7 @@ package com.koreait.matzip.vo;
 public class CodeDomain {
 	private int i_m;
 	private int cd;
-	private String val;
-	
+	private String val; 
 	
 	public int getI_m() {
 		return i_m;
