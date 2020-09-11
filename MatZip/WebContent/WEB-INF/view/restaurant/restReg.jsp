@@ -5,13 +5,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <div id="sectionContainerCenter">
 	<div>
-		<form action="/restaurant/regProc" method="post">
+		<form id="frm" action="/restaurant/regProc" method="post">
 			<div>
 				<input type="text" name="nm" placeholder="가게명">
 			</div>
 			<div>
 				<input type="text" name="addr" placeholder="주소">
-				<button>좌표 가져오기</button>
+				<input type="button" onclick="getLatLng()" value="좌표 가져오기">
 			</div>
 				<input type="hidden1" name="lat" value="0">
 				<input type="hidden1"name="lng" value="0">
@@ -25,4 +25,25 @@
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc267f04a16124aede3d52e9e1efb762&libraries=services"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		var geocoder = new kakao.maps.services.Geocoder();
+		function getLatLng(){
+			const addStr = frm.addr.value;
+			
+			if(addStr.length < 9){
+				alert("Please Check Your Address")
+				frm.addr.focus();
+				return
+			}
+			
+			geocoder.addressSearch(addStr, function(result,status){
+				if (status === kakao.maps.services.Status.OK) {
+			        console.log(result);
+			    }
+			});
+		}
+
+	</script>
 </div>

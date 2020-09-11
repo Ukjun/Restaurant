@@ -50,7 +50,10 @@ public class HandlerMapper {
 				return restCon.restMap(request);
 			case "restReg":
 				return restCon.restReg(request);
+			case "getLatLng":
+				return restCon.getLatLng(request);
 			}
+		
 		}
 
 		return "404"; // NotFound
