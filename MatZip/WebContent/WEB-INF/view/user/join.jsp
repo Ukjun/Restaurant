@@ -4,7 +4,7 @@
 <div id="sectionContainerCenter">
 	<div id="sectionContainer">
 		<form id="frm" class="frm" action="/user/joinProc" method="post">
-			<div id="idChkResult" class="msg"></div>
+			<div id="idChkResult"></div>
 			<div><input type="text" name="user_id" id="user_id" placeholder="아이디">
 				<button type="button" id="id_btn" onclick="chkId()">아이디 중복체크</button>
 			</div>
@@ -16,6 +16,7 @@
 		</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	function moveToLogin(){
 		location.href = "/user/login"
@@ -37,7 +38,9 @@
 				idChkResult.innerText = "이미 사용하는 아이디입니다."
 			}
 		})
+		document.getElementById('idChkResult').classList.toggle('msg');
 	}
 </script>
+
 </div>
 

@@ -106,6 +106,8 @@ a{
 	color : red;
 	animation-name : test22;
 	animation-duration : 3s;
+	animation-direction : normal;
+	animation-fill-mode : none;
 }
 
 @keyframes test22 {
