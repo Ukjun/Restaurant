@@ -25,20 +25,22 @@ public class RestaurantController {
 		return ViewRef.TEMP_MAP;
 	}
 	
-	public String regProc(HttpServletRequest request) {
+	public String restregProc(HttpServletRequest request) {
 		String nm = request.getParameter("nm");
 		String addr = request.getParameter("addr");
 		String strLat = request.getParameter("lat");
 		String strLng = request.getParameter("lng");
 		String strCd_category = request.getParameter("cd_category");
+		
+		// 현재 로그인한 유저의 i_user값을 들고온다
 		int i_user = SecurityUtils.getLoginUser(request).getI_user();
 		
-		double lat = MyUtils.parseStringtoDouble(strLat);
-		double lng = MyUtils.parseStringtoDouble(strLng);
-		int cd_category = Integer.parseInt(strCd_category);
+		double lat = MyUtils.getDoubleParameter(request, strLat);
+		double lng = MyUtils.getDoubleParameter(request, strLng);
+		int cd_category = MyUtils.getIntParameter(request, strCd_category);
 		
 		
-		
+		// 값 잘 넘어왔는지 테스트용도  출력 
 		RestaurantVO rest = new RestaurantVO();
 		System.out.println("nm : " + nm);
 		System.out.println("addr : " + addr);
@@ -61,7 +63,7 @@ public class RestaurantController {
 		return "redirect:/restaurant/map";
 	}
 	
-	public String getLatLng(HttpServletRequest request) {
+	public String ajacGetList(HttpServletRequest request) {
 		
 		
 		return ViewRef.TEMP_MAP;

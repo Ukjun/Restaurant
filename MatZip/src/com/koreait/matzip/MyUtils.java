@@ -4,6 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public class MyUtils {
 	
+	
+	public static int getIntParameter(HttpServletRequest request, String keyNm) {
+		return parseStringToInt(request.getParameter(keyNm));
+	}
+	public static double getDoubleParameter(HttpServletRequest request, String keyNm) {
+		return parseStringtoDouble(request.getParameter(keyNm));
+	}
 	public static int parseStringToInt(String str) {
 		return parseStringToInt(str, 0);
 	}
@@ -19,4 +26,6 @@ public class MyUtils {
 	public static double parseStringtoDouble(String str) {
 		return Double.valueOf(str);
 	}
+	
+	
 }
