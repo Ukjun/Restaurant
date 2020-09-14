@@ -117,12 +117,12 @@ public class RestaurantController {
 			}	
 		}
 		
-		/*int i_rest = MyUtils.getIntParameter("i_rest", request);
-		System.out.println("i_rest: " + i_rest);
-		String[] menu_nmArr = request.getParameterValues("menu_nm");
-		String[] menu_priceArr = request.getParameterValues("menu_price");
+//		int i_rest = MyUtils.getIntParameter("i_rest", request);
+//		System.out.println("i_rest: " + i_rest);
+//		String[] menu_nmArr = request.getParameterValues("menu_nm");
+//		String[] menu_priceArr = request.getParameterValues("menu_price");
 		//파일은 절대로 request.getParameter로 받을수없다.
-*/		
+		
 //		for(int i=0; i<menu_nmArr.length; i++) {
 //			System.out.println(i+ ": " + menu_nmArr[i] + " , " + menu_priceArr[i]);
 //		}
