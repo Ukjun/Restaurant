@@ -70,7 +70,6 @@ public class RestaurantController {
 	
 	public String ajaxGetList(HttpServletRequest request) {
 		
-		
 		return "ajax:" + service.getRestList();
 	}
 }

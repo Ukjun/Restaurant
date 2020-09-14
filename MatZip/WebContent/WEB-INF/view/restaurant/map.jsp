@@ -37,15 +37,51 @@
 		   getRestaurantList()
 		   
 		   function createMarker(item){
-		      var content = `<div class ="label"><span class="left"></span><span class="center">\${item.nm}</span><span class="right"></span></div>`;
+			   var content = document.createElement('div')
+			   content.className = 'label';
+			   
+			   var leftSpan = document.createElement('span')
+			   leftSpan.className = 'left';
+			   
+			   var rightSpan = document.createElement('span')
+			   rightSpan.className = 'right';
+			   
+			   var centerSpan = document.createElement('span')
+			   centerSpan.className = 'center';
+			   centerSpan.innerText = item.nm
+			   
+			   
+			   content.appendChild(leftSpan)
+			   content.appendChild(centerSpan)
+			   content.appendChild(rightSpan)
+			
+		      //var content = `<div class ="label"><span class="left"></span><span class="center">\${item.nm}</span><span class="right"></span></div>`;
 		      var mPos = new kakao.maps.LatLng(item.lat, item.lng)
 		      
 		      var marker = new kakao.maps.CustomOverlay({
 		          position: mPos,
 		          content: content   
 		      });
+		      
+		      /* kakao.maps.event.addListener(marker, 'click', function() {
+		    	  console.log('Marker Click : ' + item.i_rest)
+		          // 마커 위에 인포윈도우를 표시합니다
+		          infowindow.open(map, marker);  
+		    }); */
+		      addEvent(content,'click',function(){
+		    	  console.log('marker Click :' + item.i_rest)
+		      })
 		      marker.setMap(map)
 		   }
+		   function addEvent(target, type, callback){
+			   if(target.addEventListener){
+				   target.addEventListener(type,callback);
+			   }
+			   else {
+				   target.attachEvent('on' + type, callback);
+			   }
+		   }
+		   
 		   // check for Geolocation support
 		   if (navigator.geolocation) {
 		     console.log('Geolocation is supported!');

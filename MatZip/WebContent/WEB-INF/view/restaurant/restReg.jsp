@@ -82,8 +82,8 @@
 			        
 			        if(result.length>0){
 			        	resultGetLating.innerText = "V"
-			        	frm.lat.value = result[0].x;
-				       	frm.lng.value = result[0].y;	
+			        	frm.lat.value = result[0].y;
+				       	frm.lng.value = result[0].x;	
 			        }
 			       	
 			    }
