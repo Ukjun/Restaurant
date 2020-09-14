@@ -70,9 +70,15 @@
 		    }); */
 		      addEvent(content,'click',function(){
 		    	  console.log('marker Click :' + item.i_rest)
+		    	  moveToDetail(item.i_rest)
 		      })
 		      marker.setMap(map)
 		   }
+		   
+		   function moveToDetail(i_rest){
+			   location.href = '/restaurant/restDetail?i_rest=' + i_rest
+		   }
+		   
 		   function addEvent(target, type, callback){
 			   if(target.addEventListener){
 				   target.addEventListener(type,callback);

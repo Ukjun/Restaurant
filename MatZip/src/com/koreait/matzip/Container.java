@@ -2,12 +2,18 @@ package com.koreait.matzip;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 @WebServlet("/")
 public class Container extends HttpServlet {
@@ -39,10 +45,11 @@ public class Container extends HttpServlet {
 			response.sendRedirect(routerCheckResult);
 			return;
 		}
+			
 		
+		
+		System.out.println("------");
 		//로그인이 안 되어 있으면 전부 로그인이 되어 있어야함
-		
-		
 		String temp = mapper.nav(request);
 		
 		System.out.println("temp: " + temp);

@@ -26,4 +26,12 @@ public class RestaurantService {
 		Gson gson = new Gson();
 		return gson.toJson(list);
 	}
+	
+	
+	public RestaurantDomain detailList(RestaurantDomain rest) {
+		
+		dao.addHits(rest.getI_rest());
+		
+		return dao.detailList(rest);
+	}
 }

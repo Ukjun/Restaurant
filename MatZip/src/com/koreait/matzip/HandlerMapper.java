@@ -45,17 +45,21 @@ public class HandlerMapper {
 				return userCon.logOut(request);
 			}
 		case ViewRef.URI_RESTURANT:
-			switch(uriArr[2]) {
+			switch (uriArr[2]) {
 			case "map":
 				return restCon.restMap(request);
 			case "restReg":
 				return restCon.restReg(request);
 			case "restregProc":
 				return restCon.restregProc(request);
+			case "restDetail":
+				return restCon.restDetail(request);
+			case "addRecMenus":
+				return restCon.addRecMenuProc(request);
 			case "ajaxGetList":
 				return restCon.ajaxGetList(request);
-		}
-		
+			}
+
 		}
 
 		return "404"; // NotFound
