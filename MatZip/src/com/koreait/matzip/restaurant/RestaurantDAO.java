@@ -15,7 +15,7 @@ import com.koreait.matzip.vo.RestaurantVO;
 
 public class RestaurantDAO {
 	
-	public static int insertCate(RestaurantVO reset) {
+	public int insertCate(RestaurantVO reset) {
 		String sql = "insert into t_restaurant(nm, addr, lat,lng, cd_category,i_user) values(?,?,?,?,?,?)";
 		return JdbcTemplate.excuteupdate(sql, new JdbcUpdateInterface() {
 			
@@ -35,7 +35,7 @@ public class RestaurantDAO {
 	}
 	
 	
-	public static List<RestaurantDomain> selRestList(){
+	public List<RestaurantDomain> selRestList(){
 		List<RestaurantDomain> list = new ArrayList();
 		String sql = "select i_rest, nm, lat, lng from t_restaurant";
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {

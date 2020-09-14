@@ -5,27 +5,26 @@ import javax.servlet.http.HttpServletRequest;
 public class MyUtils {
 	
 	
-	public static int getIntParameter(HttpServletRequest request, String keyNm) {
-		return parseStringToInt(request.getParameter(keyNm));
-	}
-	public static double getDoubleParameter(HttpServletRequest request, String keyNm) {
-		return parseStringtoDouble(request.getParameter(keyNm));
-	}
 	public static int parseStringToInt(String str) {
-		return parseStringToInt(str, 0);
-	}
-	public static int parseStringToInt(String str, int n) {
 		try {
-			Double.parseDouble(str);
 			return Integer.parseInt(str);
-		}catch(Exception e) {
-			return n;
-		}
+		} catch(Exception e) {}		
+		return 0;
 	}
 	
-	public static double parseStringtoDouble(String str) {
-		return Double.valueOf(str);
+	public static double parseStringToDouble(String str) {
+		try {
+			return Double.parseDouble(str);
+		} catch(Exception e) {}		
+		return 0;
 	}
 	
+	public static int getIntParameter(String key, HttpServletRequest request) {
+		return parseStringToInt(request.getParameter(key));
+	}
+	
+	public static double getDoubleParameter(String key, HttpServletRequest request) {
+		return parseStringToDouble(request.getParameter(key));
+	}
 	
 }
