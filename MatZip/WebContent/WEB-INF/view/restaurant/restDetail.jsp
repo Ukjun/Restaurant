@@ -15,11 +15,11 @@
 				<form id="recFrm" action="/restaurant/addRecMenus" enctype="multipart/form-data" method = "post">
 					<div><button type="button" onclick="addRecMenu()">메뉴 추가</button></div>
 					<input type="hidden" name="i_rest" value="${data.i_rest }">
-					<div id="recItem">
-						메뉴 : <input type="text" name="menu_nm">
+					 <div id="recItem">
+						<!-- 메뉴 : <input type="text" name="menu_nm">
 						가격 : <input type="number" name="menu_price">
-						사진 : <input type="file" name="menu_pic">
-					</div>
+						사진 : <input type="file" name="menu_pic"> -->
+					</div> 
 					<div><input type="submit" value = "등록"></div>
 				</form>
 			</div>
@@ -57,6 +57,9 @@
 		</div>
 	</div>
 	<script>
+	var idx = 0;
+	
+	
 	console.log(`${LoginUser.i_user}`)
 	console.log(`${data.i_user}`)
 		function isDel(){
@@ -66,17 +69,19 @@
 		}
 	
 	function addRecMenu(){
+		// Ctrl+C Ctrl+V 조심하기
 		var div = document.createElement('div');
 		
 		var inputNm = document.createElement('input');
 		inputNm.setAttribute("type","text")
+		//생성된 input 이름 설정
 		inputNm.setAttribute('name','menu_nm')
 		var inputPrice = document.createElement('input');
 		inputPrice.setAttribute("type","number")
-		inputNm.setAttribute('name','menu_price')
+		inputPrice.setAttribute('name','menu_price')
 		var inputPic = document.createElement('input');
 		inputPic.setAttribute("type","file")
-		inputNm.setAttribute('name','menu_pic')
+		inputPic.setAttribute('name','menu_pic_' + idx++)
 		
 		
 		div.append('메뉴 : ')
@@ -88,5 +93,6 @@
 		//div id 이름 (메뉴를 다중으로 넣기위해서 )
 		recItem.append(div)
 	}
+	addRecMenu()
 	</script>
 </div>

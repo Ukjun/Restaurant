@@ -11,6 +11,7 @@ import com.koreait.matzip.db.JdbcSelectInterface;
 import com.koreait.matzip.db.JdbcTemplate;
 import com.koreait.matzip.db.JdbcUpdateInterface;
 import com.koreait.matzip.vo.RestaurantDomain;
+import com.koreait.matzip.vo.RestaurantRecommendMenuVO;
 import com.koreait.matzip.vo.RestaurantVO;
 
 public class RestaurantDAO {
@@ -129,5 +130,28 @@ public class RestaurantDAO {
 			}
 		});
 		
+	}
+
+
+	public int insRecommendMenu(RestaurantRecommendMenuVO vo) {
+		
+		String sql = " INSERT INTO t_restaurant_recommend_menu "
+				+ " (seq, i_rest, menu_nm, menu_price, menu_pic) "
+				+ " SELECT IFNULL(MAX(seq), 0) + 1, ?, ?, ?, ? "
+				+ " FROM t_restaurant_recommend_menu "
+				+ " WHERE i_rest = ? ";
+		// TODO Auto-generated method stub
+		return JdbcTemplate.excuteupdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(Connection conn, PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setInt(1, vo.getI_rest());
+				ps.setNString(2, vo.getMenu_nm());
+				ps.setInt(3, vo.getMenu_price());
+				ps.setNString(4, vo.getMenu_pic());
+				ps.setInt(5, vo.getI_rest());
+			}
+		});
 	}
 }
