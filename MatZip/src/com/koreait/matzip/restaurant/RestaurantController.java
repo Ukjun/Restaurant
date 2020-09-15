@@ -14,6 +14,7 @@ import com.koreait.matzip.MyUtils;
 import com.koreait.matzip.SecurityUtils;
 import com.koreait.matzip.ViewRef;
 import com.koreait.matzip.vo.RestaurantDomain;
+import com.koreait.matzip.vo.RestaurantRecommendMenuVO;
 import com.koreait.matzip.vo.RestaurantVO;
 import com.koreait.matzip.vo.UserVO;
 import com.mysql.cj.ParseInfo;
@@ -105,6 +106,36 @@ public class RestaurantController {
 	public String addRecMenuProc(HttpServletRequest request) {
 		int i_rest = service.addRecMenus(request);
 		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
+	}
+
+	public String ajaxDelRecMenu(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		int i_rest = MyUtils.getIntParameter("i_rest", request);
+		int seq = MyUtils.getIntParameter("seq", request);
+		String fileNm = request.getParameter("fileNm");
+		
+		RestaurantRecommendMenuVO param = new RestaurantRecommendMenuVO();
+		param.setI_rest(i_rest);
+		param.setSeq(seq);
+		
+		int result = service.delRecMenu(param);
+		String savePath = "/res/img/restaurant";
+		String tempPath = request.getServletContext().getRealPath(savePath + "/" + i_rest + "/" + fileNm);
+		
+		File file = new File(tempPath);
+		
+		if(file.exists()) {
+			if(file.delete()) {
+				System.out.println("Delete Success");
+			}else {
+				System.out.println("Delete Fail");
+			}
+		}else {
+			System.out.println("Not found File");
+			
+		}
+		
+		return "ajax:" + result;
 	}
 	
 }

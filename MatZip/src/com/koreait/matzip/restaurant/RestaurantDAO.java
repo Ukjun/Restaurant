@@ -193,4 +193,19 @@ public class RestaurantDAO {
 			}
 		});
 	}
+
+
+	public int delRecommendMenu(RestaurantRecommendMenuVO param) {
+		// TODO Auto-generated method stub
+		String sql = "delete from t_restaurant_recommend_menu where i_rest=? and seq=?";
+		return JdbcTemplate.excuteupdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(Connection conn, PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setInt(1, param.getI_rest());
+				ps.setInt(2, param.getSeq());;
+			}
+		});
+	}
 }

@@ -4,7 +4,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Pen+Script&display=swap"
 	rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="sectionContainer">
 	<div>
 		<c:if test="${LoginUser.i_user == data.i_user}">
@@ -27,7 +29,7 @@
 		</c:if>
 		<div class="recMenuContainer">
 			<c:forEach items="${recommendMenuList }" var ="item">
-				<div class="recMenuItem">
+				<div class="recMenuItem" id="recMenuItem_${item.seq }">
 					<div class="pic">
 						<c:if test="${item.menu_pic != null && item.menu_pic != ''}">
 							<img src ="/res/img/restaurant/${data.i_rest }/${item.menu_pic}" id="pic_img">
@@ -35,8 +37,13 @@
 					</div>
 					<div class="info">
 						<div class="nm">${item.menu_nm }</div>
-						<div class="price">${item.menu_price }</div>
+						<div class="price"><fmt:formatNumber type="number" value = "${item.menu_price }"></fmt:formatNumber></div>
 					</div>
+					<c:if test="${LoginUser.i_user == data.i_user && item.menu_pic != null}">
+						<div class="delIconContainer" onclick="delRecMenu(${data.i_rest},${item.seq },'${item.menu_pic }')">
+							<span class= "material-icons">clear</span>
+						</div>
+					</c:if>
 				</div>
 			</c:forEach>
 		</div>
@@ -71,9 +78,11 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script>
-	var idx = 0;
 	
+	
+	var idx = 0;
 	
 	console.log(`${LoginUser.i_user}`)
 	console.log(`${data.i_user}`)
@@ -109,5 +118,23 @@
 		recItem.append(div)
 	}
 	addRecMenu()
+	
+	
+	function delRecMenu(i_rest,seq,fileNm){
+		console.log("i_rest: " + i_rest)
+		console.log("seq : " + seq)
+		
+		axios.get('/restaurant/ajaxDelRecMenu',{
+			params:{
+				i_rest, seq, fileNm
+			}
+		}).then(function(res){
+			if(res.data==1){
+				//element 삭제
+				var ele = document.querySelector('#recMenuItem_' + seq)
+				ele.remove();
+			}
+		})
+	}
 	</script>
 </div>
