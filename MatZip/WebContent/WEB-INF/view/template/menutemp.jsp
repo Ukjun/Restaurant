@@ -8,8 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
-
+<c:forEach items="${css }" var="item">
+		<link rel="stylesheet" type="text/css" href="/res/css/${item }.css">
+</c:forEach>
 <link rel="stylesheet" type="text/css" href="/res/css/common.css">
 </head>
 <body>

@@ -83,25 +83,28 @@ public class RestaurantController {
 	public String restDetail(HttpServletRequest request) {
 		request.setAttribute(Const.TITLE, "Insert Category");
 		request.setAttribute(Const.VIEW, "restaurant/restDetail");
+		RestaurantVO param = new RestaurantVO();
 		int i_rest = MyUtils.getIntParameter("i_rest", request);
+		
+		param.setI_rest(i_rest);
 //		UserVO Loginuser = SecurityUtils.getLoginUser(request);
 		System.out.println("i_rest:" + i_rest);
 //		System.out.println("i_user : " + Loginuser.getI_user());
 
+		
 		RestaurantDomain rest = new RestaurantDomain();
 		rest.setI_rest(i_rest);
 //		rest.setI_user(Loginuser.getI_user());
-
+		request.setAttribute("css", new String[] {("restaurant")});
+		request.setAttribute("recommendMenuList", service.getRecommendMenuList(i_rest));
 		request.setAttribute("data", service.detailList(rest));
 
 		return ViewRef.TEMP_MAP;
 	}
 
 	public String addRecMenuProc(HttpServletRequest request) {
-		
-		
 		int i_rest = service.addRecMenus(request);
-
 		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
 	}
+	
 }

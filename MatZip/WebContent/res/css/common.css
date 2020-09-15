@@ -141,3 +141,17 @@ a{
 	object-fit: cover;
 	width: 100%;
 }
+#recItem{
+	border : 1px solid black;
+}
+#recItem > input {
+	width : 50px;	
+}
+#menu_btn, #menu_sub{ 
+	width : 150px;
+	height : 40px;
+}
+
+.cnt_hit, .cnt_facvorite{
+	color : blue;
+}

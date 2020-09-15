@@ -13,18 +13,33 @@
 				<button onclick="isDel()">삭제</button>
 				
 				<form id="recFrm" action="/restaurant/addRecMenus" enctype="multipart/form-data" method = "post">
-					<div><button type="button" onclick="addRecMenu()">메뉴 추가</button></div>
+					<div><button type="button" id="menu_btn" onclick="addRecMenu()">메뉴 추가</button></div>
 					<input type="hidden" name="i_rest" value="${data.i_rest }">
 					 <div id="recItem">
 						<!-- 메뉴 : <input type="text" name="menu_nm">
 						가격 : <input type="number" name="menu_price">
 						사진 : <input type="file" name="menu_pic"> -->
 					</div> 
-					<div><input type="submit" value = "등록"></div>
+					<div><input type="submit" id="menu_sub" value = "등록"></div>
 				</form>
 			</div>
 			
 		</c:if>
+		<div class="recMenuContainer">
+			<c:forEach items="${recommendMenuList }" var ="item">
+				<div class="recMenuItem">
+					<div class="pic">
+						<c:if test="${item.menu_pic != null && item.menu_pic != ''}">
+							<img src ="/res/img/restaurant/${data.i_rest }/${item.menu_pic}" id="pic_img">
+						</c:if>
+					</div>
+					<div class="info">
+						<div class="nm">${item.menu_nm }</div>
+						<div class="price">${item.menu_price }</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 		<div>가게사진들</div>
 		<div class="restaurant-detail">
 			<div id="detail-header">
@@ -34,9 +49,9 @@
 					</span>
 				</div>
 				<div class="status_branch_none"></div>
-				<span class="cnt_hit">조회수 : ${data.cntHits }</span> 
+				조회수 : <span class="cnt_hit">${data.cntHits }</span> 
 				<span class="cnt_review"></span> 
-				<span class="cnt_facvorite">찜 : ${data.cntFavorite }</span>
+				찜 : <span class="cnt_facvorite">${data.cntFavorite }</span>
 
 			</div>
 			<div>

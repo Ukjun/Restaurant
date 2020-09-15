@@ -119,6 +119,45 @@ public class RestaurantDAO {
 		});
 		return vo;
 	}
+	public List<RestaurantRecommendMenuVO> selRecommendMenuList(int i_rest){
+		List<RestaurantRecommendMenuVO> list = new ArrayList();
+		
+		String sql = "select seq, menu_nm, menu_price, menu_pic "
+				+ "from t_restaurant_recommend_menu "
+				+ "where i_rest = ?";
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public List<?> selBoard(ResultSet rs) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setInt(1, i_rest);
+			}
+			
+			@Override
+			public void executeQuery(ResultSet rs) throws SQLException {
+				// TODO Auto-generated method stub
+				while(rs.next()) {
+					RestaurantRecommendMenuVO vo = new RestaurantRecommendMenuVO();
+					vo.setSeq(rs.getInt("seq"));
+					vo.setMenu_nm(rs.getNString("menu_nm"));
+					vo.setMenu_price(rs.getInt("menu_price"));
+					vo.setMenu_pic(rs.getNString("menu_pic"));
+					list.add(vo);
+				}
+			}
+		});
+		
+		
+		return list;
+	}
+	
+	
 	public void addHits(final int i_rest) {
 		String sql = "update t_restaurant set cntHits = cntHits + 1 where i_rest =?";
 		JdbcTemplate.excuteupdate(sql, new JdbcUpdateInterface() {
