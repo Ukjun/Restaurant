@@ -17,7 +17,8 @@ public class DBManager {
 	
 	
 	public static Connection getCon() throws Exception{
-		String url= "jdbc:mysql://localhost:3306/matzip";
+		//한글 깨짐방지 (DB설정 다했는데도 깨지는경우 있음)
+		String url= "jdbc:mysql://localhost:3306/matzip?useUnicode=true&characterEncoding=UTF-8";
 		String user = "root";
 		String pw = "koreait2020";
 		String className = "com.mysql.cj.jdbc.Driver";

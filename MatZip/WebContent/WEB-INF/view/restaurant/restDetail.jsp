@@ -7,22 +7,30 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="sectionContainer">
 	<div>
 		<c:if test="${LoginUser.i_user == data.i_user}">
 			<div>
 				<a href="/restaurant/restMod"><button>수정</button></a>
-				<button onclick="isDel()">삭제</button>
+				<button onclick="isDel()">가게 삭제</button>
 				
 				<form id="recFrm" action="/restaurant/addRecMenus" enctype="multipart/form-data" method = "post">
-					<div><button type="button" id="menu_btn" onclick="addRecMenu()">메뉴 추가</button></div>
+					<div><button type="button" id="menu_btn" onclick="addRecMenu()">추천 메뉴 추가</button></div>
 					<input type="hidden" name="i_rest" value="${data.i_rest }">
 					 <div id="recItem">
-						<!-- 메뉴 : <input type="text" name="menu_nm">
-						가격 : <input type="number" name="menu_price">
-						사진 : <input type="file" name="menu_pic"> -->
 					</div> 
 					<div><input type="submit" id="menu_sub" value = "등록"></div>
+				</form>
+			</div>
+			
+			<h2>-메뉴-</h2>
+			<div>
+				<form id="menuFrm" action="/restaurant/addMenuProc" enctype="multipart/form-data" method = "post">
+					<input type="hidden" name="i_rest" value="${data.i_rest }">
+					<input type="file" name="menu_pic" multiple>
+					<div id="menuItem"></div>
+					<div><input type="submit" value="등록"></div>
 				</form>
 			</div>
 			
@@ -47,6 +55,23 @@
 				</div>
 			</c:forEach>
 		</div>
+		<div class="recMenuContainer">
+			<c:forEach items="${menuList }" var ="item">
+				<div class="recMenuItem" id="recMenuItem_${item.seq }">
+					<div class="pic">
+						<c:if test="${item.menu_pic != null && item.menu_pic != ''}">
+							<img src ="/res/img/restaurant/${data.i_rest }/menu/${item.menu_pic}" id="pic_img">
+						</c:if>
+					</div>
+					<c:if test="${LoginUser.i_user == data.i_user && item.menu_pic != null}">
+						<div class="delIconContainer" onclick="delMenu(${data.i_rest},${item.seq },'${item.menu_pic }')">
+							<span class= "material-icons">clear</span>
+						</div>
+					</c:if>
+				</div>
+			</c:forEach>
+		</div>
+		
 		<div>가게사진들</div>
 		<div class="restaurant-detail">
 			<div id="detail-header">
@@ -73,6 +98,27 @@
 							<th>카테고리</th>
 							<td>${data.cd_category_nm }</td>
 						</tr>
+						<tr>
+							<th>메뉴</th>
+							<td>
+							<div class="menuList">
+							<c:if test="${fn:length(menuList)>0 }">
+								<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
+											<div class="menuItem">
+												<img src="/res/img/restaurant/${data.i_rest}/menu/${menuList[i].menu_pic}">
+											</div>
+								</c:forEach>
+							</c:if>
+								<c:if test="${fn:length(menuList) > 3}">
+									<div class="menuItem bg_black">
+										<div class="moreCnt">
+											+${fn:length(menuList) - 3}
+										</div>
+									</div>
+								</c:if>
+							</div>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -91,7 +137,10 @@
 				location.href = '/restaurant/restDel?i_rest=${data.i_rest}'
 			}
 		}
-	
+	function addMenu(){
+		
+	}
+	addMenu()
 	function addRecMenu(){
 		// Ctrl+C Ctrl+V 조심하기
 		var div = document.createElement('div');
@@ -124,17 +173,42 @@
 		console.log("i_rest: " + i_rest)
 		console.log("seq : " + seq)
 		
+		//여기서 이엘식 적는것은 고정값을 지정하는 것 
 		axios.get('/restaurant/ajaxDelRecMenu',{
 			params:{
-				i_rest, seq, fileNm
+				i_rest, 
+				seq, 
+				fileNm,
+				'i_user' : ${data.i_user}
 			}
 		}).then(function(res){
-			if(res.data==1){
+			if(res.data.result==1){
 				//element 삭제
 				var ele = document.querySelector('#recMenuItem_' + seq)
 				ele.remove();
 			}
 		})
 	}
+	function delMenu(i_rest,seq,fileNm){
+		console.log("i_rest: " + i_rest)
+		console.log("seq : " + seq)
+		
+		//여기서 이엘식 적는것은 고정값을 지정하는 것 
+		axios.get('/restaurant/ajaxDelMenu',{
+			params:{
+				i_rest, 
+				seq, 
+				fileNm,
+				'i_user' : ${data.i_user}
+			}
+		}).then(function(res){
+			if(res.data.result==1){
+				//element 삭제
+				var ele = document.querySelector('#recMenuItem_' + seq)
+				ele.remove();
+			}
+		})
+	}
+	
 	</script>
 </div>

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 @WebServlet("/")
+@MultipartConfig(
+		fileSizeThreshold = 10_485_760,
+		maxFileSize = 52_428_800,
+		maxRequestSize = 104_857_600
+		)
 public class Container extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,6 +58,8 @@ public class Container extends HttpServlet {
 		//로그인이 안 되어 있으면 전부 로그인이 되어 있어야함
 		String temp = mapper.nav(request);
 		
+		
+		//redirect나 ajax가 있다면 다르게 처리 그것이 아니라면 jsp파일로 이동
 		System.out.println("temp: " + temp);
 		System.out.println("const.view : " + Const.VIEW);
 		if(temp.indexOf(":") >= 0) {
@@ -66,14 +74,10 @@ public class Container extends HttpServlet {
 				response.sendRedirect(value);
 				return;
 			} else if("ajax".equals(prefix)) {
-				
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("application/json");
-				
-				
 				// 서블릿 형태에서 바로 응답해오는 것 jsp파일이 PrintWriter로 변환되서 응답된다.
 				PrintWriter out = response.getWriter();
-				
 				System.out.println("value : " + value);
 				out.print(value);
 				return;

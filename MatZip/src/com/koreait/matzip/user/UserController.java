@@ -96,7 +96,7 @@ public class UserController {
 		
 		
 		
-		return String.format("ajax:{\"result\": %s}",result);
+		return String.format("user ajax:{\"result\": %s}",result);
 	}
 	
 	

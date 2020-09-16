@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import com.koreait.matzip.vo.UserVO;
 
 public class SecurityUtils {
-	
+	public static int getLoginUserPk(HttpServletRequest request) {
+		return getLoginUser(request).getI_user();
+	}
 	
 	public static UserVO getLoginUser(HttpServletRequest request) { // 로그인 유저 확인
 		HttpSession hs = request.getSession();

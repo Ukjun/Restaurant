@@ -5,9 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.Gson;
 import com.koreait.matzip.FileUtils;
@@ -45,6 +54,48 @@ public class RestaurantService {
 		return dao.detailList(rest);
 	}
 
+	public int addMenus(HttpServletRequest request) {
+		RestaurantRecommendMenuVO vo = new RestaurantRecommendMenuVO();
+		int i_rest = MyUtils.getIntParameter("i_rest", request);
+		System.out.println("i_rest: " + i_rest);
+		String savePath = request.getServletContext().getRealPath("/res/img/restaurant"); 
+		String tempPath = savePath + "/temp";
+		FileUtils.makeFolder(tempPath);
+		
+		
+		try {
+			for(Part part : request.getParts()) {
+				String fileName = part.getSubmittedFileName(); // 파일 저장
+				System.out.println("fileName : " + fileName);
+				String saveFileNm = "";
+                if(fileName != null) {
+                	part.write(tempPath + "/" + fileName);
+                	String ext = FileUtils.getExt(fileName);
+                	System.out.println("ext: "  + ext);
+					saveFileNm = UUID.randomUUID() + ext;
+					System.out.println("saveFileNm: " + saveFileNm);
+					
+					String targetPath = savePath + "/" + i_rest + "/menu";
+					System.out.println("targetPath: " + targetPath);
+					FileUtils.makeFolder(targetPath);
+					
+					
+					File oldFile = new File(tempPath + "/" + fileName);
+					File newFIle = new File(targetPath + "/" + saveFileNm);
+
+					oldFile.renameTo(newFIle);
+					vo.setI_rest(i_rest);
+					vo.setMenu_pic(saveFileNm);
+					dao.insRestaurantMenu(vo);
+                }
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return i_rest;
+	}
 	public int addRecMenus(HttpServletRequest request) {
 
 		// 업로드 경로
@@ -140,6 +191,9 @@ public class RestaurantService {
 
 		return i_rest;
 	}
+	public List<RestaurantRecommendMenuVO> getMenuList(int i_rest){
+		return dao.selMenuList(i_rest);
+	}
 	public List<RestaurantRecommendMenuVO> getRecommendMenuList(int i_rest) {
 		return dao.selRecommendMenuList(i_rest);
 	}
@@ -147,6 +201,11 @@ public class RestaurantService {
 	public int delRecMenu(RestaurantRecommendMenuVO param) {
 		// TODO Auto-generated method stub
 		return dao.delRecommendMenu(param);
+	}
+	
+	public int delMenu(RestaurantRecommendMenuVO param) {
+		// TODO Auto-generated method stub
+		return dao.delMenu(param);
 	}
 
 
